@@ -9,7 +9,7 @@ class TextWidget extends StatelessWidget {
     return Scaffold(
         body: Text(
       text,
-      style: TextStyle(
+      style: const TextStyle(
         fontSize: 12,
         fontWeight: FontWeight.bold,
       ),
