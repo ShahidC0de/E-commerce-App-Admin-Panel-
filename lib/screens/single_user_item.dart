@@ -56,7 +56,7 @@ class _SingleUserItemState extends State<SingleUserItem> {
                   onPressed: () async {
                     await widget.appProvider.deleteTheUser(widget.userModel);
                   },
-                  icon: const Icon(Icons.delete))
+                  icon: const Icon(Icons.delete)),
         ],
       ),
     ));

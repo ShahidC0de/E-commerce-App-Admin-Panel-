@@ -19,7 +19,7 @@ class AppProvider with ChangeNotifier {
     // the function is an interface which will call the firebasefirestorehelper to perform the action;
   }
 
-  bool _isDeletingLoading = false;
+  final bool _isDeletingLoading = false;
   Future<void> deleteTheUser(UserModel userModel) async {
     _isDeletingLoading == true;
     notifyListeners();
@@ -43,5 +43,27 @@ class AppProvider with ChangeNotifier {
   Future<void> callBackFunction() async {
     await getUsersList();
     await getCatogoryList();
+  }
+
+  Future<void> deleteCategoryFromFirebase(CategoryModel categoryModel) async {
+    _isDeletingLoading == true;
+    notifyListeners();
+    String value = await FirebaseFirestoreHelper.instance
+        .deleteSingleCategorie(categoryModel.id);
+    if (value == 'successfully deleted') {
+      _categoresList.remove(categoryModel);
+      showMessage('delete successfully');
+    }
+    _isDeletingLoading == false;
+
+    notifyListeners();
+  }
+
+  Future<void> updateCategoryToFirebase(
+      int index, CategoryModel categoryModel) async {
+    _isDeletingLoading == true;
+    await FirebaseFirestoreHelper.instance.updateSingleCategorie(categoryModel);
+    _categoresList[index] = categoryModel;
+    notifyListeners();
   }
 }

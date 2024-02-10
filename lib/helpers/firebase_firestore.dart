@@ -1,9 +1,6 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:techtrove_admin/constants/constants.dart';
 import 'package:techtrove_admin/models/category_model.dart';
 import 'package:techtrove_admin/models/user_model.dart';
@@ -38,6 +35,29 @@ class FirebaseFirestoreHelper {
       return 'successfully deleted';
     } catch (e) {
       return (e.toString());
+    }
+  }
+
+  Future<String> deleteSingleCategorie(String id) async {
+    try {
+      await FirebaseFirestore.instance
+          .collection('categories1')
+          .doc(id)
+          .delete();
+      return 'successfully deleted';
+    } catch (e) {
+      return (e.toString());
+    }
+  }
+
+  Future<void> updateSingleCategorie(CategoryModel categoryModel) async {
+    try {
+      await FirebaseFirestore.instance
+          .collection('categories1')
+          .doc(categoryModel.id)
+          .update(categoryModel.toJson());
+    } catch (e) {
+      showMessage(e.toString());
     }
   }
 }
