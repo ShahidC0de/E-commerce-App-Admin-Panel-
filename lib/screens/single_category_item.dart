@@ -2,10 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:techtrove_admin/models/category_model.dart';
 import 'package:techtrove_admin/provider/app_provider.dart';
+import 'package:techtrove_admin/screens/edit_catogory.dart';
 
 class SingleCategoryItem extends StatefulWidget {
   final CategoryModel singleCategory;
-  const SingleCategoryItem({super.key, required this.singleCategory});
+  final int index;
+  const SingleCategoryItem(
+      {super.key, required this.singleCategory, required this.index});
 
   @override
   State<SingleCategoryItem> createState() => _SingleCategoryItemState();
@@ -61,7 +64,16 @@ class _SingleCategoryItemState extends State<SingleCategoryItem> {
                   width: 12.0,
                 ),
                 GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (ctx) => EditCategory(
+                          categoryModel: widget.singleCategory,
+                          index: widget.index,
+                        ),
+                      ),
+                    );
+                  },
                   child: const Icon(Icons.edit),
                 ),
               ],

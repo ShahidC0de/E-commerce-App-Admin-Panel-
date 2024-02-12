@@ -19,7 +19,8 @@ class UsersPage extends StatelessWidget {
             itemCount: value.getUserList.length,
             itemBuilder: (context, index) {
               UserModel userModel = value.getUserList[index];
-              return SingleUserItem(userModel: userModel, appProvider: value);
+              return SingleUserItem(
+                  index: index, userModel: userModel, appProvider: value);
             });
       }),
     );

@@ -45,6 +45,13 @@ class AppProvider with ChangeNotifier {
     await getCatogoryList();
   }
 
+  void updateUserInfo(int index, UserModel userModel) async {
+    await FirebaseFirestoreHelper.instance.updateUser(userModel);
+
+    _usersList[index] = userModel;
+    notifyListeners();
+  }
+
   Future<void> deleteCategoryFromFirebase(CategoryModel categoryModel) async {
     _isDeletingLoading == true;
     notifyListeners();
@@ -59,10 +66,8 @@ class AppProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> updateCategoryToFirebase(
-      int index, CategoryModel categoryModel) async {
-    _isDeletingLoading == true;
-    await FirebaseFirestoreHelper.instance.updateSingleCategorie(categoryModel);
+  void updateCategoryList(int index, CategoryModel categoryModel) async {
+    await FirebaseFirestoreHelper.instance.updateSingleCategory(categoryModel);
     _categoresList[index] = categoryModel;
     notifyListeners();
   }

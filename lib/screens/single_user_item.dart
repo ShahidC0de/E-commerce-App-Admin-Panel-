@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:techtrove_admin/models/user_model.dart';
 import 'package:techtrove_admin/provider/app_provider.dart';
+import 'package:techtrove_admin/screens/edit_profile.dart';
 
 class SingleUserItem extends StatefulWidget {
   final UserModel userModel;
   final AppProvider appProvider;
+  final int index;
   const SingleUserItem(
-      {super.key, required this.userModel, required this.appProvider});
+      {super.key,
+      required this.userModel,
+      required this.appProvider,
+      required this.index});
 
   @override
   State<SingleUserItem> createState() => _SingleUserItemState();
@@ -57,6 +62,15 @@ class _SingleUserItemState extends State<SingleUserItem> {
                     await widget.appProvider.deleteTheUser(widget.userModel);
                   },
                   icon: const Icon(Icons.delete)),
+          IconButton(
+              onPressed: () async {
+                // Navigator.of(context).push(MaterialPageRoute(
+                //     builder: (ctx) => EditProfile(
+                //           userModel: widget.userModel,
+                //           index: widget.index,
+                //         )));
+              },
+              icon: const Icon(Icons.edit)),
         ],
       ),
     ));

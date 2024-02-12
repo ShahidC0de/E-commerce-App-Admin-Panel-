@@ -38,6 +38,15 @@ class FirebaseFirestoreHelper {
     }
   }
 
+  Future<void> updateUser(UserModel userModel) async {
+    try {
+      FirebaseFirestore.instance
+          .collection('users')
+          .doc(userModel.id)
+          .update(userModel.toJson());
+    } catch (_) {}
+  }
+
   Future<String> deleteSingleCategorie(String id) async {
     try {
       await FirebaseFirestore.instance
@@ -50,14 +59,14 @@ class FirebaseFirestoreHelper {
     }
   }
 
-  Future<void> updateSingleCategorie(CategoryModel categoryModel) async {
+  Future<void> updateSingleCategory(CategoryModel categoryModel) async {
     try {
       await FirebaseFirestore.instance
           .collection('categories1')
           .doc(categoryModel.id)
-          .update(categoryModel.toJson());
-    } catch (e) {
-      showMessage(e.toString());
-    }
+          .update(
+            categoryModel.toJson(),
+          );
+    } catch (_) {}
   }
 }

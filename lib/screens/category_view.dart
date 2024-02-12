@@ -2,10 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:techtrove_admin/models/category_model.dart';
-import 'package:techtrove_admin/models/user_model.dart';
 import 'package:techtrove_admin/provider/app_provider.dart';
 import 'package:techtrove_admin/screens/single_category_item.dart';
-import 'package:techtrove_admin/screens/single_user_item.dart';
 
 class CategoriesPage extends StatelessWidget {
   const CategoriesPage({super.key});
@@ -14,6 +12,9 @@ class CategoriesPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        actions: [
+          IconButton(onPressed: () {}, icon: const Icon(Icons.add_circle))
+        ],
         centerTitle: true,
         title: const Text('Categories'),
       ),
@@ -27,7 +28,10 @@ class CategoriesPage extends StatelessWidget {
                   crossAxisCount: 2),
               itemBuilder: (context, index) {
                 CategoryModel categoryModel = value.getCatogoriesList[index];
-                return SingleCategoryItem(singleCategory: categoryModel);
+                return SingleCategoryItem(
+                  singleCategory: categoryModel,
+                  index: index,
+                );
               }),
         );
       }),
