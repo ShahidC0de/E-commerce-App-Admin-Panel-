@@ -1,8 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:techtrove_admin/models/category_model.dart';
 import 'package:techtrove_admin/provider/app_provider.dart';
+import 'package:techtrove_admin/screens/add_category.dart';
 import 'package:techtrove_admin/screens/single_category_item.dart';
 
 class CategoriesPage extends StatelessWidget {
@@ -13,7 +13,12 @@ class CategoriesPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         actions: [
-          IconButton(onPressed: () {}, icon: const Icon(Icons.add_circle))
+          IconButton(
+              onPressed: () {
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (ctx) => const AddCategory()));
+              },
+              icon: const Icon(Icons.add_circle))
         ],
         centerTitle: true,
         title: const Text('Categories'),

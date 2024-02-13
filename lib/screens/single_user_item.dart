@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:techtrove_admin/models/user_model.dart';
 import 'package:techtrove_admin/provider/app_provider.dart';
-import 'package:techtrove_admin/screens/edit_profile.dart';
 
 class SingleUserItem extends StatefulWidget {
   final UserModel userModel;

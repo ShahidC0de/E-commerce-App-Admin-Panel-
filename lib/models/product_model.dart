@@ -13,12 +13,14 @@ class ProductModel {
     required this.price,
     required this.description,
     required this.isFavourate,
+    required this.categoryId,
     this.qty,
   });
 
   String image;
   String id;
   String name;
+  String categoryId;
   double price;
   String description;
 
@@ -28,6 +30,7 @@ class ProductModel {
   factory ProductModel.fronJson(Map<String, dynamic> json) => ProductModel(
         id: json["id"],
         name: json["name"],
+        categoryId: json["categoryId"],
         description: json["description"] ?? "",
         qty: json["qty"],
         image: json["image"] ?? "default_image_url",
@@ -37,24 +40,13 @@ class ProductModel {
   Map<String, dynamic> toJson() => {
         "id": id,
         "name": name,
+        "categoryId": categoryId,
         "image": image,
         "description": description,
         "price": price,
         "isFavourate": isFavourate,
         "qty": qty,
       };
-  ProductModel copyWith({
-    int? qty,
-  }) =>
-      ProductModel(
-        id: id,
-        name: name,
-        description: description,
-        qty: qty ?? this.qty,
-        image: image,
-        isFavourate: isFavourate,
-        price: price,
-      );
 
   static fromJson(decode) {}
 }

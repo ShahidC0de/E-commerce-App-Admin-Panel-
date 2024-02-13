@@ -1,8 +1,12 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:techtrove_admin/constants/constants.dart';
+import 'package:techtrove_admin/helpers/firebase_storage_helper.dart';
 import 'package:techtrove_admin/models/category_model.dart';
+import 'package:techtrove_admin/models/product_model.dart';
 import 'package:techtrove_admin/models/user_model.dart';
 
 class FirebaseFirestoreHelper {
@@ -68,5 +72,24 @@ class FirebaseFirestoreHelper {
             categoryModel.toJson(),
           );
     } catch (_) {}
+  }
+
+  Future<CategoryModel> addSingleCategory(File image, String name) async {
+    CollectionReference reference =
+        FirebaseFirestore.instance.collection('categories1');
+    String imageUrl = await FirebaseStorageHelper.instance
+        .uploadUserImage(reference.id, image);
+    CategoryModel addCategory =
+        CategoryModel(image: imageUrl, id: reference.id, name: name);
+    await reference.add(addCategory.toJson());
+    return addCategory;
+  }
+
+  Future<List<ProductModel>> getProducts() async {
+    QuerySnapshot<Map<String, dynamic>> querySnapshot =
+        await _firebaseFirestore.collectionGroup('products').get();
+    List<ProductModel> productModel =
+        querySnapshot.docs.map((e) => ProductModel.fronJson(e.data())).toList();
+    return productModel;
   }
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:techtrove_admin/provider/app_provider.dart';
 import 'package:techtrove_admin/screens/category_view.dart';
+import 'package:techtrove_admin/screens/product_page.dart';
 import 'package:techtrove_admin/screens/single_dash_item.dart';
 import 'package:techtrove_admin/screens/users_page.dart';
 
@@ -89,8 +90,11 @@ class _HomePageState extends State<HomePage> {
                                 appProvider.getCatogoriesList.length.toString(),
                             subtitle: 'Categories'),
                         SingleDashItem(
-                            onpressed: () {},
-                            title: '500',
+                            onpressed: () {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (ctx) => const ProductView()));
+                            },
+                            title: appProvider.getProductList.length.toString(),
                             subtitle: 'Products'),
                         SingleDashItem(
                             onpressed: () {},

@@ -1,14 +1,19 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:techtrove_admin/constants/constants.dart';
 import 'package:techtrove_admin/helpers/firebase_firestore.dart';
 import 'package:techtrove_admin/models/category_model.dart';
+import 'package:techtrove_admin/models/product_model.dart';
 import 'package:techtrove_admin/models/user_model.dart';
 
 class AppProvider with ChangeNotifier {
   List<UserModel> _usersList = []; // an empty list of type usermodel class;
   List<CategoryModel> _categoresList = [];
+  List<ProductModel> _productModelList = [];
+
   Future<void> getUsersList() async {
     _usersList = await FirebaseFirestoreHelper.instance.getUsersList();
     // the function is an interface which will call the firebasefirestorehelper to perform the action;
@@ -17,6 +22,10 @@ class AppProvider with ChangeNotifier {
   Future<void> getCatogoryList() async {
     _categoresList = await FirebaseFirestoreHelper.instance.getCategories1();
     // the function is an interface which will call the firebasefirestorehelper to perform the action;
+  }
+
+  Future<void> getProducts() async {
+    _productModelList = await FirebaseFirestoreHelper.instance.getProducts();
   }
 
   final bool _isDeletingLoading = false;
@@ -36,6 +45,7 @@ class AppProvider with ChangeNotifier {
 
   List<CategoryModel> get getCatogoriesList => _categoresList;
   List<UserModel> get getUserList => _usersList;
+  List<ProductModel> get getProductList => _productModelList;
   bool get getDeletingLoading => _isDeletingLoading;
 
   // the purpose of this to use this list anywhere else in the code,withoud accessing the actual _usersList;
@@ -43,6 +53,7 @@ class AppProvider with ChangeNotifier {
   Future<void> callBackFunction() async {
     await getUsersList();
     await getCatogoryList();
+    await getProducts();
   }
 
   void updateUserInfo(int index, UserModel userModel) async {
@@ -69,6 +80,13 @@ class AppProvider with ChangeNotifier {
   void updateCategoryList(int index, CategoryModel categoryModel) async {
     await FirebaseFirestoreHelper.instance.updateSingleCategory(categoryModel);
     _categoresList[index] = categoryModel;
+    notifyListeners();
+  }
+
+  void addCategoryModel(File image, String name) async {
+    CategoryModel categoryModel =
+        await FirebaseFirestoreHelper.instance.addSingleCategory(image, name);
+    _categoresList.add(categoryModel);
     notifyListeners();
   }
 }
