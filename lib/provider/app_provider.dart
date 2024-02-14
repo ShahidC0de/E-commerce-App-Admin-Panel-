@@ -89,4 +89,21 @@ class AppProvider with ChangeNotifier {
     _categoresList.add(categoryModel);
     notifyListeners();
   }
+
+  Future<void> deleteProductFromFirebase(ProductModel productModel) async {
+    String value = await FirebaseFirestoreHelper.instance
+        .deleteSingleProduct(productModel.categoryId, productModel.id);
+    if (value == 'successfully deleted') {
+      _productModelList.remove(productModel);
+      showMessage('successfully deleted');
+    }
+    notifyListeners();
+  }
+
+  Future<void> updateSingleProductToFirebase(
+      int index, ProductModel productModel) async {
+    await FirebaseFirestoreHelper.instance.updateSingleProduct(productModel);
+    _productModelList[index] = productModel;
+    notifyListeners();
+  }
 }

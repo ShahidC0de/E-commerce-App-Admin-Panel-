@@ -47,6 +47,24 @@ class ProductModel {
         "isFavourate": isFavourate,
         "qty": qty,
       };
+  ProductModel copyWith({
+    String? name,
+    String? image,
+    String? id,
+    String? categoryId,
+    String? description,
+    String? price,
+  }) =>
+      ProductModel(
+        id: id ?? this.id,
+        name: name ?? this.name,
+        categoryId: categoryId ?? this.categoryId,
+        description: description ?? this.description,
+        image: image ?? this.image,
+        price: price != null ? double.parse(price) : this.price,
+        qty: 1,
+        isFavourate: false,
+      );
 
   static fromJson(decode) {}
 }

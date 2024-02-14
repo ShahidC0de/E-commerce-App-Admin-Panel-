@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:techtrove_admin/models/product_model.dart';
 import 'package:techtrove_admin/provider/app_provider.dart';
+import 'package:techtrove_admin/screens/add_product.dart';
 import 'package:techtrove_admin/screens/single_product_item.dart';
 
 class ProductView extends StatefulWidget {
@@ -19,7 +20,12 @@ class _ProductViewState extends State<ProductView> {
     return Scaffold(
       appBar: AppBar(
         actions: [
-          IconButton(onPressed: () {}, icon: const Icon(Icons.add_circle))
+          IconButton(
+              onPressed: () {
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (ctx) => const AddProduct()));
+              },
+              icon: const Icon(Icons.add_circle))
         ],
         centerTitle: true,
         title: const Text('Products'),
@@ -38,7 +44,10 @@ class _ProductViewState extends State<ProductView> {
                 crossAxisCount: 2),
             itemBuilder: (ctx, index) {
               ProductModel singleProduct = appProvider.getProductList[index];
-              return SingleProductItem(singleProduct: singleProduct);
+              return SingleProductItem(
+                singleProduct: singleProduct,
+                index: index,
+              );
             }),
       ),
     );

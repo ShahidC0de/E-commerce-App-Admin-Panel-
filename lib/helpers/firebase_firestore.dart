@@ -92,4 +92,29 @@ class FirebaseFirestoreHelper {
         querySnapshot.docs.map((e) => ProductModel.fronJson(e.data())).toList();
     return productModel;
   }
+
+  Future<String> deleteSingleProduct(
+      String categoryId, String productId) async {
+    try {
+      await FirebaseFirestore.instance
+          .collection('categories1')
+          .doc(categoryId)
+          .collection('products')
+          .doc(productId)
+          .delete();
+
+      return 'successfully deleted';
+    } catch (e) {
+      return (e.toString());
+    }
+  }
+
+  Future<void> updateSingleProduct(ProductModel productModel) async {
+    await FirebaseFirestore.instance
+        .collection('categories1')
+        .doc(productModel.categoryId)
+        .collection('products')
+        .doc(productModel.id)
+        .update(productModel.toJson());
+  }
 }

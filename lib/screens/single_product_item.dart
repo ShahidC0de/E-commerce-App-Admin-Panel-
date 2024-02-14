@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:techtrove_admin/models/product_model.dart';
+import 'package:techtrove_admin/provider/app_provider.dart';
+import 'package:techtrove_admin/screens/edit_product.dart';
 
 class SingleProductItem extends StatefulWidget {
   const SingleProductItem({
     super.key,
     required this.singleProduct,
+    required this.index,
   });
 
   final ProductModel singleProduct;
+  final int index;
 
   @override
   State<SingleProductItem> createState() => _SingleProductItemState();
@@ -17,6 +22,8 @@ class _SingleProductItemState extends State<SingleProductItem> {
   bool isLoading = false;
   @override
   Widget build(BuildContext context) {
+    AppProvider appProvider = Provider.of<AppProvider>(context);
+
     return Card(
       color: Colors.white,
       elevation: 3.0,
@@ -32,8 +39,8 @@ class _SingleProductItemState extends State<SingleProductItem> {
               children: [
                 Image.network(
                   widget.singleProduct.image,
-                  height: 60,
-                  width: 60,
+                  height: 100,
+                  width: 100,
                 ),
                 const SizedBox(
                   height: 12.0,
@@ -66,8 +73,8 @@ class _SingleProductItemState extends State<SingleProductItem> {
                             setState(() {
                               isLoading = true;
                             });
-                            // await appProvider.deleteCategoryFromFirebase(
-                            //     widget.singleCategory);
+                            await appProvider.deleteProductFromFirebase(
+                                widget.singleProduct);
                             setState(() {
                               isLoading = false;
                             });
@@ -80,14 +87,14 @@ class _SingleProductItemState extends State<SingleProductItem> {
                 ),
                 GestureDetector(
                   onTap: () {
-                    // Navigator.of(context).push(
-                    //   MaterialPageRoute(
-                    //     builder: (ctx) => EditCategory(
-                    //       categoryModel: widget.singleCategory,
-                    //       index: widget.index,
-                    //     ),
-                    //   ),
-                    // );
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (ctx) => EditProduct(
+                          productModel: widget.singleProduct,
+                          index: widget.index,
+                        ),
+                      ),
+                    );
                   },
                   child: const Icon(Icons.edit),
                 ),
