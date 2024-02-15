@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:techtrove_admin/constants/constants.dart';
+import 'package:techtrove_admin/models/category_model.dart';
 
 import 'package:techtrove_admin/provider/app_provider.dart';
 
@@ -32,6 +33,7 @@ class _AddProductState extends State<AddProduct> {
   TextEditingController name = TextEditingController();
   TextEditingController price = TextEditingController();
   TextEditingController description = TextEditingController();
+  CategoryModel? _selectedCategory;
 
   @override
   Widget build(BuildContext context) {
@@ -166,26 +168,41 @@ class _AddProductState extends State<AddProduct> {
           const SizedBox(
             height: 25.0,
           ),
+          DropdownButtonFormField(
+            value: _selectedCategory,
+            hint: const Text(
+              'Select Category',
+            ),
+            isExpanded: true,
+            onChanged: (value) {
+              setState(() {
+                _selectedCategory = value;
+              });
+            },
+            items: appProvider.getCatogoriesList.map((CategoryModel val) {
+              return DropdownMenuItem(
+                value: val,
+                child: Text(
+                  val.name,
+                ),
+              );
+            }).toList(),
+          ),
+          const SizedBox(
+            height: 24.0,
+          ),
           ElevatedButton(
               onPressed: () async {
                 if (image == null ||
+                    _selectedCategory == null ||
                     name.text.isEmpty ||
                     description.text.isEmpty ||
                     price.text.isEmpty) {
                   showMessage('please fill all boxes');
                 } else {
-                  // String imageUrl = await FirebaseStorageHelper.instance
-                  //     .uploadUserImage(widget.productModel.id, image!);
-                  // ProductModel productModel = widget.productModel.copyWith(
-                  //   description:
-                  //       description.text.isEmpty ? null : description.text,
-                  //   name: name.text.isEmpty ? null : name.text,
-                  //   price: price.text.isEmpty ? null : price.text,
-                  //   image: imageUrl,
-                  // );
+                  appProvider.addProduct(image!, name.text, description.text,
+                      price.text, _selectedCategory!.id);
 
-                  // appProvider.updateSingleProductToFirebase(
-                  //     widget.index, productModel);
                   showMessage('updated');
                   Navigator.of(context).pop();
                 }

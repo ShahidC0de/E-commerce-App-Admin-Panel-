@@ -75,13 +75,13 @@ class FirebaseFirestoreHelper {
   }
 
   Future<CategoryModel> addSingleCategory(File image, String name) async {
-    CollectionReference reference =
-        FirebaseFirestore.instance.collection('categories1');
+    DocumentReference reference =
+        FirebaseFirestore.instance.collection('categories1').doc();
     String imageUrl = await FirebaseStorageHelper.instance
         .uploadUserImage(reference.id, image);
     CategoryModel addCategory =
         CategoryModel(image: imageUrl, id: reference.id, name: name);
-    await reference.add(addCategory.toJson());
+    await reference.set(addCategory.toJson());
     return addCategory;
   }
 
@@ -116,5 +116,28 @@ class FirebaseFirestoreHelper {
         .collection('products')
         .doc(productModel.id)
         .update(productModel.toJson());
+  }
+
+  Future<ProductModel> addSingleProduct(File image, String name,
+      String description, String price, String categoryId) async {
+    DocumentReference reference = FirebaseFirestore.instance
+        .collection('categories1')
+        .doc(categoryId)
+        .collection('products')
+        .doc();
+    String imageUrl = await FirebaseStorageHelper.instance
+        .uploadUserImage(reference.id, image);
+    ProductModel addProduct = ProductModel(
+      image: imageUrl,
+      id: reference.id,
+      name: name,
+      price: double.parse(price),
+      description: description,
+      categoryId: categoryId,
+      isFavourate: false,
+      qty: 1,
+    );
+    await reference.set(addProduct.toJson());
+    return addProduct;
   }
 }

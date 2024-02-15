@@ -106,4 +106,17 @@ class AppProvider with ChangeNotifier {
     _productModelList[index] = productModel;
     notifyListeners();
   }
+
+  void addProduct(
+    File image,
+    String name,
+    String description,
+    String price,
+    String categoryId,
+  ) async {
+    ProductModel productModel = await FirebaseFirestoreHelper.instance
+        .addSingleProduct(image, name, description, price, categoryId);
+    _productModelList.add(productModel);
+    notifyListeners();
+  }
 }
