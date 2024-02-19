@@ -152,4 +152,15 @@ class FirebaseFirestoreHelper {
         completedOrders.docs.map((e) => OrderModel.fronJson(e.data())).toList();
     return completedOrderList;
   }
+
+  Future<List<OrderModel>> getCanceledOrders() async {
+    QuerySnapshot<Map<String, dynamic>> canceledOrders = await FirebaseFirestore
+        .instance
+        .collection('orders')
+        .where('status', isEqualTo: 'Cancel')
+        .get();
+    List<OrderModel> canceledOrderList =
+        canceledOrders.docs.map((e) => OrderModel.fronJson(e.data())).toList();
+    return canceledOrderList;
+  }
 }

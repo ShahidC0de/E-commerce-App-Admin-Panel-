@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:techtrove_admin/provider/app_provider.dart';
 import 'package:techtrove_admin/screens/category_view.dart';
+import 'package:techtrove_admin/screens/order_list.dart';
 import 'package:techtrove_admin/screens/product_page.dart';
 import 'package:techtrove_admin/screens/single_dash_item.dart';
 import 'package:techtrove_admin/screens/users_page.dart';
@@ -105,16 +106,27 @@ class _HomePageState extends State<HomePage> {
                             title: '8',
                             subtitle: 'Pending Orders'),
                         SingleDashItem(
-                            onpressed: () {},
+                            onpressed: () {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (ctx) => OrderViewList(
+                                      title: "Completed Orders",
+                                      ordermodelList:
+                                          appProvider.getComPletedOrdErs)));
+                            },
                             title: appProvider.getComPletedOrdErs.length
                                 .toString(),
                             subtitle: 'Completed Orders'),
                         SingleDashItem(
-                            onpressed: () {}, title: '8', subtitle: 'Canceled'),
-                        SingleDashItem(
-                            onpressed: () {},
-                            title: '18',
-                            subtitle: 'Completed'),
+                            onpressed: () {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (ctx) => OrderViewList(
+                                      ordermodelList:
+                                          appProvider.getCancelOrders,
+                                      title: "Canceled Orders")));
+                            },
+                            title:
+                                appProvider.getCancelOrders.length.toString(),
+                            subtitle: 'Canceled'),
                       ],
                     )
                   ],
