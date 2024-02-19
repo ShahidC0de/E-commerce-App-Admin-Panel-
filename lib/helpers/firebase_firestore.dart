@@ -6,6 +6,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:techtrove_admin/constants/constants.dart';
 import 'package:techtrove_admin/helpers/firebase_storage_helper.dart';
 import 'package:techtrove_admin/models/category_model.dart';
+import 'package:techtrove_admin/models/order_model.dart';
 import 'package:techtrove_admin/models/product_model.dart';
 import 'package:techtrove_admin/models/user_model.dart';
 
@@ -139,5 +140,16 @@ class FirebaseFirestoreHelper {
     );
     await reference.set(addProduct.toJson());
     return addProduct;
+  }
+
+  Future<List<OrderModel>> getCompletedOrders() async {
+    QuerySnapshot<Map<String, dynamic>> completedOrders =
+        await FirebaseFirestore.instance
+            .collection('orders')
+            .where('status', isEqualTo: 'Completed')
+            .get();
+    List<OrderModel> completedOrderList =
+        completedOrders.docs.map((e) => OrderModel.fronJson(e.data())).toList();
+    return completedOrderList;
   }
 }

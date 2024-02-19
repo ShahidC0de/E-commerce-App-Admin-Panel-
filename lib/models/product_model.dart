@@ -28,9 +28,9 @@ class ProductModel {
   int? qty;
 
   factory ProductModel.fronJson(Map<String, dynamic> json) => ProductModel(
-        id: json["id"],
+        id: json["id"].toString(),
         name: json["name"],
-        categoryId: json["categoryId"],
+        categoryId: json["categoryId"] ?? "",
         description: json["description"] ?? "",
         qty: json["qty"],
         image: json["image"] ?? "default_image_url",

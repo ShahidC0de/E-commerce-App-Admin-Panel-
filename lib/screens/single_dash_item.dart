@@ -24,8 +24,9 @@ class SingleDashItem extends StatelessWidget {
               ),
               Text(
                 title,
-                style:
-                    const TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                style: TextStyle(
+                    fontSize: subtitle == 'Earning' ? 20 : 25,
+                    fontWeight: FontWeight.bold),
               ),
               Text(
                 subtitle,

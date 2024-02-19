@@ -98,7 +98,7 @@ class _HomePageState extends State<HomePage> {
                             subtitle: 'Products'),
                         SingleDashItem(
                             onpressed: () {},
-                            title: 'Rs: 6000',
+                            title: 'Rs:  ${appProvider.getTotalEarning} ',
                             subtitle: 'Earning'),
                         SingleDashItem(
                             onpressed: () {},
@@ -106,7 +106,8 @@ class _HomePageState extends State<HomePage> {
                             subtitle: 'Pending Orders'),
                         SingleDashItem(
                             onpressed: () {},
-                            title: '30',
+                            title: appProvider.getComPletedOrdErs.length
+                                .toString(),
                             subtitle: 'Completed Orders'),
                         SingleDashItem(
                             onpressed: () {}, title: '8', subtitle: 'Canceled'),
