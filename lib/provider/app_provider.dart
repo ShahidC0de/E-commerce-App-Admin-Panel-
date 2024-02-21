@@ -16,6 +16,13 @@ class AppProvider with ChangeNotifier {
   List<ProductModel> _productModelList = [];
   List<OrderModel> _completedOrderList = [];
   List<OrderModel> _canceledOrderList = [];
+  List<OrderModel> _pendingOrderList = [];
+
+  Future<void> getPendingOrders() async {
+    _pendingOrderList =
+        await FirebaseFirestoreHelper.instance.getPendingOrders();
+  }
+
   double _totalEarning = 0.0;
   Future<void> getCanceledOrders() async {
     _canceledOrderList =
@@ -69,6 +76,7 @@ class AppProvider with ChangeNotifier {
   double get getTotalEarning => _totalEarning;
   bool get getDeletingLoading => _isDeletingLoading;
   List<OrderModel> get getCancelOrders => _canceledOrderList;
+  List<OrderModel> get getPendOrders => _pendingOrderList;
   // the purpose of this to use this list anywhere else in the code,withoud accessing the actual _usersList;
   // calling a function is good but actually its getter which fetches the data from the given list;
   Future<void> callBackFunction() async {
@@ -77,6 +85,7 @@ class AppProvider with ChangeNotifier {
     await getProducts();
     await getCompletedOrders();
     await getCanceledOrders();
+    await getPendingOrders();
   }
 
   void updateUserInfo(int index, UserModel userModel) async {

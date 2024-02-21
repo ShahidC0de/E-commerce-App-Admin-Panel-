@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_null_comparison
+
 import 'package:flutter/material.dart';
 import 'package:techtrove_admin/models/order_model.dart';
 
@@ -19,11 +21,14 @@ class SingleOrderWidget extends StatelessWidget {
             children: [
               //the image part of item in listview.
 
-              Container(
-                  height: 120,
-                  width: 120,
-                  color: Colors.white.withOpacity(0.5),
-                  child: Image.network(orderModel.products[0].image)),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                    height: 120,
+                    width: 120,
+                    color: Colors.white.withOpacity(0.5),
+                    child: Image.network(orderModel.products[0].image)),
+              ),
               //the rest space of listview.
               Expanded(
                 flex: 2,
@@ -39,6 +44,7 @@ class SingleOrderWidget extends StatelessWidget {
                             orderModel.products[0].name,
                             style: const TextStyle(
                               color: Colors.lightBlueAccent,
+                              fontSize: 12,
                             ),
                           ),
                           const SizedBox(
@@ -48,6 +54,7 @@ class SingleOrderWidget extends StatelessWidget {
                             "Rs: ${orderModel.totalPrice.toString()}",
                             style: const TextStyle(
                               color: Colors.lightBlueAccent,
+                              fontSize: 12,
                             ),
                           ),
                           const SizedBox(
@@ -57,6 +64,7 @@ class SingleOrderWidget extends StatelessWidget {
                             "Status: ${orderModel.status}",
                             style: const TextStyle(
                               color: Colors.lightBlueAccent,
+                              fontSize: 12,
                             ),
                           ),
                           const SizedBox(
@@ -70,8 +78,18 @@ class SingleOrderWidget extends StatelessWidget {
                                       "Quantity: ${orderModel.products[0].qty.toString()}",
                                       style: const TextStyle(
                                         color: Colors.lightBlueAccent,
+                                        fontSize: 12,
                                       ),
                                     ),
+                                    orderModel.orderAddress != null
+                                        ? Text(
+                                            "OrderAddress: ${orderModel.orderAddress}",
+                                            style: const TextStyle(
+                                              color: Colors.lightBlueAccent,
+                                              fontSize: 12,
+                                            ),
+                                          )
+                                        : SizedBox.fromSize(),
                                   ],
                                 )
                         ],

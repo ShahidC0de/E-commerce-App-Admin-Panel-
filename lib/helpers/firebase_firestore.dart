@@ -146,7 +146,7 @@ class FirebaseFirestoreHelper {
     QuerySnapshot<Map<String, dynamic>> completedOrders =
         await FirebaseFirestore.instance
             .collection('orders')
-            .where('status', isEqualTo: 'Completed')
+            .where('status', isEqualTo: 'Delievered')
             .get();
     List<OrderModel> completedOrderList =
         completedOrders.docs.map((e) => OrderModel.fronJson(e.data())).toList();
@@ -157,10 +157,21 @@ class FirebaseFirestoreHelper {
     QuerySnapshot<Map<String, dynamic>> canceledOrders = await FirebaseFirestore
         .instance
         .collection('orders')
-        .where('status', isEqualTo: 'Cancel')
+        .where('status', isEqualTo: 'Canceled')
         .get();
     List<OrderModel> canceledOrderList =
         canceledOrders.docs.map((e) => OrderModel.fronJson(e.data())).toList();
     return canceledOrderList;
+  }
+
+  Future<List<OrderModel>> getPendingOrders() async {
+    QuerySnapshot<Map<String, dynamic>> pendingOrders = await FirebaseFirestore
+        .instance
+        .collection('orders')
+        .where('status', isEqualTo: 'pending')
+        .get();
+    List<OrderModel> pendingOrdersList =
+        pendingOrders.docs.map((e) => OrderModel.fronJson(e.data())).toList();
+    return pendingOrdersList;
   }
 }

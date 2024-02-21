@@ -102,8 +102,13 @@ class _HomePageState extends State<HomePage> {
                             title: 'Rs:  ${appProvider.getTotalEarning} ',
                             subtitle: 'Earning'),
                         SingleDashItem(
-                            onpressed: () {},
-                            title: '8',
+                            onpressed: () {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (ctx) => OrderViewList(
+                                      ordermodelList: appProvider.getPendOrders,
+                                      title: 'Pending Orders')));
+                            },
+                            title: appProvider.getPendOrders.length.toString(),
                             subtitle: 'Pending Orders'),
                         SingleDashItem(
                             onpressed: () {
@@ -115,7 +120,7 @@ class _HomePageState extends State<HomePage> {
                             },
                             title: appProvider.getComPletedOrdErs.length
                                 .toString(),
-                            subtitle: 'Completed Orders'),
+                            subtitle: 'Deleivered Orders'),
                         SingleDashItem(
                             onpressed: () {
                               Navigator.of(context).push(MaterialPageRoute(
