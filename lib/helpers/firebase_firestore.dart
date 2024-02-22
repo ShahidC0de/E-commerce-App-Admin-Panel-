@@ -174,4 +174,21 @@ class FirebaseFirestoreHelper {
         pendingOrders.docs.map((e) => OrderModel.fronJson(e.data())).toList();
     return pendingOrdersList;
   }
+
+  Future<void> updateOrderStatus(OrderModel orderModel, String update) async {
+    await FirebaseFirestore.instance
+        .collection('usersOrders')
+        .doc(orderModel.userId)
+        .collection('orders')
+        .doc(orderModel.orderId)
+        .update({
+      'status': update,
+    });
+    await FirebaseFirestore.instance
+        .collection('orders')
+        .doc(orderModel.orderId)
+        .update({
+      'status': update,
+    });
+  }
 }

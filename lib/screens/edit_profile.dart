@@ -39,11 +39,12 @@ class _EditProfileState extends State<EditProfile> {
     AppProvider appProvider = Provider.of<AppProvider>(context);
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.blueAccent,
+        centerTitle: true,
         title: const Text(
           "Edit Profile",
           style: TextStyle(
-            color: Colors.lightBlueAccent,
+            color: Colors.white,
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -55,7 +56,12 @@ class _EditProfileState extends State<EditProfile> {
               ? CupertinoButton(
                   onPressed: takePicture,
                   child: const CircleAvatar(
-                      radius: 70, child: Icon(Icons.camera_alt)),
+                      backgroundColor: Colors.blueAccent,
+                      radius: 70,
+                      child: Icon(
+                        Icons.camera_alt,
+                        color: Colors.white,
+                      )),
                 )
               : CupertinoButton(
                   onPressed: takePicture,
@@ -75,18 +81,20 @@ class _EditProfileState extends State<EditProfile> {
                 //EMAIL TEXTFORM FILED
                 hintText: widget.userModel.name,
                 hintStyle: const TextStyle(
-                  color: Colors.lightBlueAccent,
+                  color: Colors.blueAccent,
                 ),
                 prefixIcon: const Icon(
                   //putting an icon.
                   Icons.email_outlined,
-                  color: Colors.lightBlueAccent,
+                  color: Colors.blueAccent,
                 ),
                 border: OutlineInputBorder(
                   borderSide: const BorderSide(
-                    color: Colors.lightBlueAccent,
+                    color: Colors.blueAccent,
                   ),
-                  borderRadius: BorderRadius.circular(40.0),
+                  borderRadius: BorderRadius.circular(
+                    40.0,
+                  ),
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderSide: const BorderSide(
@@ -99,28 +107,41 @@ class _EditProfileState extends State<EditProfile> {
           const SizedBox(
             height: 25.0,
           ),
-          ElevatedButton(
-              onPressed: () async {
-                if (image == null && name.text.isEmpty) {
+          SizedBox(
+            height: 50,
+            width: double.infinity,
+            child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.blueAccent,
+                ),
+                onPressed: () async {
+                  if (image == null && name.text.isEmpty) {
+                    Navigator.of(context).pop();
+                  } else if (image != null) {
+                    String imageUrl = await FirebaseStorageHelper.instance
+                        .uploadUserImage(widget.userModel.id, image!);
+                    UserModel userModel = widget.userModel.copyWith(
+                      image: imageUrl,
+                      name: name.text.isEmpty ? null : name.text,
+                    );
+                    appProvider.updateUserInfo(widget.index, userModel);
+                  } else {
+                    UserModel userModel = widget.userModel.copyWith(
+                      name: name.text.isEmpty ? null : name.text,
+                    );
+                    appProvider.updateUserInfo(widget.index, userModel);
+                  }
+                  showMessage('updated');
                   Navigator.of(context).pop();
-                } else if (image != null) {
-                  String imageUrl = await FirebaseStorageHelper.instance
-                      .uploadUserImage(widget.userModel.id, image!);
-                  UserModel userModel = widget.userModel.copyWith(
-                    image: imageUrl,
-                    name: name.text.isEmpty ? null : name.text,
-                  );
-                  appProvider.updateUserInfo(widget.index, userModel);
-                } else {
-                  UserModel userModel = widget.userModel.copyWith(
-                    name: name.text.isEmpty ? null : name.text,
-                  );
-                  appProvider.updateUserInfo(widget.index, userModel);
-                }
-                showMessage('updated');
-                Navigator.of(context).pop();
-              },
-              child: const Text("Update"))
+                },
+                child: const Text(
+                  "Update",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
+                )),
+          )
         ],
       ),
     );

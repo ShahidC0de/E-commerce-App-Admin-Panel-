@@ -151,4 +151,9 @@ class AppProvider with ChangeNotifier {
     _productModelList.add(productModel);
     notifyListeners();
   }
+
+  Future<void> updateUserOrder(OrderModel orderModel, String update) async {
+    await FirebaseFirestoreHelper.instance
+        .updateOrderStatus(orderModel, update);
+  }
 }

@@ -8,7 +8,7 @@ import 'package:techtrove_admin/screens/single_dash_item.dart';
 import 'package:techtrove_admin/screens/users_page.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+  const HomePage({Key? key}) : super(key: key);
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -41,30 +41,32 @@ class _HomePageState extends State<HomePage> {
     );
 
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
+        backgroundColor: Colors.blue,
         centerTitle: true,
-        title: const Text('Dashboard'),
+        title: const Text(
+          'Dashboard',
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+        ),
       ),
       body: isLoading
           ? const Center(child: CircularProgressIndicator())
           : SingleChildScrollView(
               child: Padding(
-                padding: const EdgeInsets.fromLTRB(8, 8, 8, 8),
+                padding: const EdgeInsets.all(8),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  //crossAxisAlignment is for starting the widget in start of column,
-
                   children: [
-                    //a widget which is for showing picture in a circle box,
                     const CircleAvatar(
+                      backgroundColor: Colors.blue,
                       radius: 30,
                     ),
-                    const SizedBox(
-                      height: 12.0,
-                    ),
+                    const SizedBox(height: 12),
                     const Text(
                       'shahidzada.cs@gmail.com',
                       style: TextStyle(
+                        color: Colors.blue,
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
                       ),
@@ -72,66 +74,86 @@ class _HomePageState extends State<HomePage> {
                     GridView.count(
                       primary: false,
                       shrinkWrap: true,
-                      padding: const EdgeInsets.all(12.0),
+                      padding: const EdgeInsets.all(12),
                       crossAxisCount: 2,
                       children: [
                         SingleDashItem(
-                            onpressed: () {
-                              Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (ctx) => const UsersPage()));
-                            },
-                            title: appProvider.getUserList.length.toString(),
-                            subtitle: 'Users'),
+                          onPressed: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                              builder: (ctx) => const UsersPage(),
+                            ));
+                          },
+                          title: appProvider.getUserList.length.toString(),
+                          subtitle: 'Users',
+                          backgroundColor: Colors.blue, // Blue color
+                        ),
                         SingleDashItem(
-                            onpressed: () {
-                              Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (ctx) => const CategoriesPage()));
-                            },
-                            title:
-                                appProvider.getCatogoriesList.length.toString(),
-                            subtitle: 'Categories'),
+                          onPressed: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                              builder: (ctx) => const CategoriesPage(),
+                            ));
+                          },
+                          title:
+                              appProvider.getCatogoriesList.length.toString(),
+                          subtitle: 'Categories',
+                          backgroundColor: Colors.green, // Green color
+                        ),
                         SingleDashItem(
-                            onpressed: () {
-                              Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (ctx) => const ProductView()));
-                            },
-                            title: appProvider.getProductList.length.toString(),
-                            subtitle: 'Products'),
+                          onPressed: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                              builder: (ctx) => const ProductView(),
+                            ));
+                          },
+                          title: appProvider.getProductList.length.toString(),
+                          subtitle: 'Products',
+                          backgroundColor: Colors.red, // Red color
+                        ),
                         SingleDashItem(
-                            onpressed: () {},
-                            title: 'Rs:  ${appProvider.getTotalEarning} ',
-                            subtitle: 'Earning'),
+                          onPressed: () {},
+                          title: 'Rs: ${appProvider.getTotalEarning}',
+                          subtitle: 'Earning',
+                          backgroundColor: Colors.purple, // Purple color
+                        ),
                         SingleDashItem(
-                            onpressed: () {
-                              Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (ctx) => OrderViewList(
-                                      ordermodelList: appProvider.getPendOrders,
-                                      title: 'Pending Orders')));
-                            },
-                            title: appProvider.getPendOrders.length.toString(),
-                            subtitle: 'Pending Orders'),
+                          onPressed: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                              builder: (ctx) => OrderViewList(
+                                ordermodelList: appProvider.getPendOrders,
+                                title: 'Pending Orders',
+                              ),
+                            ));
+                          },
+                          title: appProvider.getPendOrders.length.toString(),
+                          subtitle: 'Pending Orders',
+                          backgroundColor: Colors.blue, // Blue color
+                        ),
                         SingleDashItem(
-                            onpressed: () {
-                              Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (ctx) => OrderViewList(
-                                      title: "Completed Orders",
-                                      ordermodelList:
-                                          appProvider.getComPletedOrdErs)));
-                            },
-                            title: appProvider.getComPletedOrdErs.length
-                                .toString(),
-                            subtitle: 'Deleivered Orders'),
+                          onPressed: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                              builder: (ctx) => OrderViewList(
+                                title: "Completed Orders",
+                                ordermodelList: appProvider.getComPletedOrdErs,
+                              ),
+                            ));
+                          },
+                          title:
+                              appProvider.getComPletedOrdErs.length.toString(),
+                          subtitle: 'Delivered Orders',
+                          backgroundColor: Colors.green, // Green color
+                        ),
                         SingleDashItem(
-                            onpressed: () {
-                              Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (ctx) => OrderViewList(
-                                      ordermodelList:
-                                          appProvider.getCancelOrders,
-                                      title: "Canceled Orders")));
-                            },
-                            title:
-                                appProvider.getCancelOrders.length.toString(),
-                            subtitle: 'Canceled'),
+                          onPressed: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                              builder: (ctx) => OrderViewList(
+                                ordermodelList: appProvider.getCancelOrders,
+                                title: "Canceled Orders",
+                              ),
+                            ));
+                          },
+                          title: appProvider.getCancelOrders.length.toString(),
+                          subtitle: 'Canceled Orders',
+                          backgroundColor: Colors.red, // Red color
+                        ),
                       ],
                     )
                   ],
@@ -141,4 +163,3 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
-//its generally a list, where each map considered as an item,

@@ -8,6 +8,7 @@ class OrderModel {
     required this.totalPrice,
     required this.products,
     required this.orderAddress,
+    required this.userId,
   });
 
   String payment;
@@ -16,10 +17,12 @@ class OrderModel {
   List<ProductModel> products;
   double totalPrice;
   String orderAddress;
+  String userId;
 
   factory OrderModel.fronJson(Map<String, dynamic> json) {
     List<dynamic> productMap = json["products"] ?? [];
     return OrderModel(
+      userId: json["userId"] ?? "",
       orderAddress: json["orderAddress"] ?? "",
       orderId: json["orderId"] ?? "",
       products: productMap.map((e) => ProductModel.fronJson(e)).toList(),
