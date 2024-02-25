@@ -37,11 +37,11 @@ class _AddCategoryState extends State<AddCategory> {
     AppProvider appProvider = Provider.of<AppProvider>(context);
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.green,
         title: const Text(
           "Add Category",
           style: TextStyle(
-            color: Colors.lightBlueAccent,
+            color: Colors.white,
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -53,7 +53,12 @@ class _AddCategoryState extends State<AddCategory> {
               ? CupertinoButton(
                   onPressed: takePicture,
                   child: const CircleAvatar(
-                      radius: 70, child: Icon(Icons.camera_alt)),
+                      backgroundColor: Colors.green,
+                      radius: 70,
+                      child: Icon(
+                        Icons.camera_alt,
+                        color: Colors.white,
+                      )),
                 )
               : CupertinoButton(
                   onPressed: takePicture,
@@ -67,18 +72,18 @@ class _AddCategoryState extends State<AddCategory> {
           ),
           TextFormField(
             controller: name,
-            keyboardType: TextInputType.emailAddress,
+            keyboardType: TextInputType.name,
             decoration: InputDecoration(
                 //decoration of textformfield.
                 //EMAIL TEXTFORM FILED
                 hintText: 'Category Name',
                 hintStyle: const TextStyle(
-                  color: Colors.lightBlueAccent,
+                  color: Colors.green,
                 ),
                 prefixIcon: const Icon(
                   //putting an icon.
-                  Icons.email_outlined,
-                  color: Colors.lightBlueAccent,
+                  Icons.category,
+                  color: Colors.green,
                 ),
                 border: OutlineInputBorder(
                   borderSide: const BorderSide(
@@ -89,7 +94,7 @@ class _AddCategoryState extends State<AddCategory> {
                 focusedBorder: OutlineInputBorder(
                   borderSide: const BorderSide(
                     width: 2,
-                    color: Colors.lightBlueAccent,
+                    color: Colors.green,
                   ),
                   borderRadius: BorderRadius.circular(40.0),
                 )),
@@ -98,6 +103,9 @@ class _AddCategoryState extends State<AddCategory> {
             height: 25.0,
           ),
           ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.green,
+              ),
               onPressed: () async {
                 if (image == null && name.text.isEmpty) {
                   Navigator.of(context).pop();
@@ -107,7 +115,12 @@ class _AddCategoryState extends State<AddCategory> {
                 showMessage('Successfully Added');
                 Navigator.of(context).pop();
               },
-              child: const Text("Add"))
+              child: const Text(
+                "Add",
+                style: TextStyle(
+                  color: Colors.white,
+                ),
+              ))
         ],
       ),
     );

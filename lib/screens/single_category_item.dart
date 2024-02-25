@@ -57,7 +57,10 @@ class _SingleCategoryItemState extends State<SingleCategoryItem> {
                               isLoading = false;
                             });
                           },
-                          child: const Icon(Icons.delete),
+                          child: const Icon(
+                            Icons.delete,
+                            color: Colors.red,
+                          ),
                         ),
                 ),
                 const SizedBox(
@@ -74,7 +77,10 @@ class _SingleCategoryItemState extends State<SingleCategoryItem> {
                       ),
                     );
                   },
-                  child: const Icon(Icons.edit),
+                  child: const Icon(
+                    Icons.edit,
+                    color: Colors.green,
+                  ),
                 ),
               ],
             ),

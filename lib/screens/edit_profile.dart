@@ -108,7 +108,7 @@ class _EditProfileState extends State<EditProfile> {
             height: 25.0,
           ),
           SizedBox(
-            height: 50,
+            height: 55,
             width: double.infinity,
             child: ElevatedButton(
                 style: ElevatedButton.styleFrom(

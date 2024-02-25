@@ -12,16 +12,26 @@ class CategoriesPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.green,
         actions: [
           IconButton(
               onPressed: () {
                 Navigator.of(context).push(
                     MaterialPageRoute(builder: (ctx) => const AddCategory()));
               },
-              icon: const Icon(Icons.add_circle))
+              icon: const Icon(
+                Icons.add_circle,
+                color: Colors.white,
+              ))
         ],
         centerTitle: true,
-        title: const Text('Categories'),
+        title: const Text(
+          'Categories',
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
       ),
       body: Consumer<AppProvider>(builder: (context, value, child) {
         return SingleChildScrollView(

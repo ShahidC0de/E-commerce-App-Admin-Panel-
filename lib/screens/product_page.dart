@@ -19,16 +19,23 @@ class _ProductViewState extends State<ProductView> {
 
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.red,
         actions: [
           IconButton(
               onPressed: () {
                 Navigator.of(context).push(
                     MaterialPageRoute(builder: (ctx) => const AddProduct()));
               },
-              icon: const Icon(Icons.add_circle))
+              icon: const Icon(
+                Icons.add_circle,
+                color: Colors.white,
+              ))
         ],
         centerTitle: true,
-        title: const Text('Products'),
+        title: const Text(
+          'Products',
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),

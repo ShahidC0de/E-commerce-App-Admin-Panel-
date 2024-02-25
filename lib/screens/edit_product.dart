@@ -43,11 +43,12 @@ class _EditProductState extends State<EditProduct> {
     AppProvider appProvider = Provider.of<AppProvider>(context);
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.red,
+        centerTitle: true,
         title: const Text(
           "Edit Product",
           style: TextStyle(
-            color: Colors.lightBlueAccent,
+            color: Colors.white,
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -59,6 +60,7 @@ class _EditProductState extends State<EditProduct> {
               ? CupertinoButton(
                   onPressed: takePicture,
                   child: CircleAvatar(
+                    backgroundColor: Colors.red,
                     radius: 70,
                     backgroundImage: NetworkImage(widget.productModel.image),
                   ),
@@ -75,30 +77,27 @@ class _EditProductState extends State<EditProduct> {
           ),
           TextFormField(
             controller: name,
-            keyboardType: TextInputType.emailAddress,
+            keyboardType: TextInputType.name,
             decoration: InputDecoration(
                 //decoration of textformfield.
                 //EMAIL TEXTFORM FILED
                 hintText: widget.productModel.name,
                 hintStyle: const TextStyle(
-                  color: Colors.lightBlueAccent,
+                  color: Colors.red,
                 ),
                 prefixIcon: const Icon(
                   //putting an icon.
-                  Icons.email_outlined,
-                  color: Colors.lightBlueAccent,
+                  Icons.widgets,
+                  color: Colors.red,
                 ),
                 border: OutlineInputBorder(
                   borderSide: const BorderSide(
-                    color: Colors.lightBlueAccent,
+                    color: Colors.red,
                   ),
                   borderRadius: BorderRadius.circular(40.0),
                 ),
                 focusedBorder: OutlineInputBorder(
-                  borderSide: const BorderSide(
-                    width: 2,
-                    color: Colors.lightBlueAccent,
-                  ),
+                  borderSide: const BorderSide(width: 2, color: Colors.red),
                   borderRadius: BorderRadius.circular(40.0),
                 )),
           ),
@@ -107,19 +106,19 @@ class _EditProductState extends State<EditProduct> {
           ),
           TextFormField(
             controller: description,
-            keyboardType: TextInputType.emailAddress,
+            keyboardType: TextInputType.text,
             maxLines: 8,
             decoration: InputDecoration(
                 //decoration of textformfield.
                 //EMAIL TEXTFORM FILED
                 hintText: widget.productModel.description,
                 hintStyle: const TextStyle(
-                  color: Colors.lightBlueAccent,
+                  color: Colors.red,
                 ),
                 prefixIcon: const Icon(
                   //putting an icon.
-                  Icons.email_outlined,
-                  color: Colors.lightBlueAccent,
+                  Icons.description,
+                  color: Colors.red,
                 ),
                 border: OutlineInputBorder(
                   borderSide: const BorderSide(
@@ -146,23 +145,23 @@ class _EditProductState extends State<EditProduct> {
                 //EMAIL TEXTFORM FILED
                 hintText: widget.productModel.price.toString(),
                 hintStyle: const TextStyle(
-                  color: Colors.lightBlueAccent,
+                  color: Colors.red,
                 ),
                 prefixIcon: const Icon(
                   //putting an icon.
-                  Icons.email_outlined,
-                  color: Colors.lightBlueAccent,
+                  Icons.price_change,
+                  color: Colors.red,
                 ),
                 border: OutlineInputBorder(
                   borderSide: const BorderSide(
-                    color: Colors.lightBlueAccent,
+                    color: Colors.red,
                   ),
                   borderRadius: BorderRadius.circular(40.0),
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderSide: const BorderSide(
                     width: 2,
-                    color: Colors.lightBlueAccent,
+                    color: Colors.red,
                   ),
                   borderRadius: BorderRadius.circular(40.0),
                 )),
@@ -171,6 +170,9 @@ class _EditProductState extends State<EditProduct> {
             height: 25.0,
           ),
           ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.red,
+              ),
               onPressed: () async {
                 if (image == null &&
                     name.text.isEmpty &&
@@ -204,7 +206,12 @@ class _EditProductState extends State<EditProduct> {
                 showMessage('updated');
                 Navigator.of(context).pop();
               },
-              child: const Text("Update"))
+              child: const Text(
+                "Update",
+                style: TextStyle(
+                  color: Colors.white,
+                ),
+              ))
         ],
       ),
     );

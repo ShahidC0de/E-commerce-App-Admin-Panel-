@@ -48,11 +48,17 @@ class _SingleProductItemState extends State<SingleProductItem> {
                 Text(
                   widget.singleProduct.name,
                   style: const TextStyle(
-                    fontSize: 10.0,
-                    color: Colors.lightBlueAccent,
+                    fontSize: 15.0,
+                    color: Colors.red,
                   ),
                 ),
-                Text("Rs: ${widget.singleProduct.price}"),
+                Text(
+                  "Rs: ${widget.singleProduct.price}",
+                  style: const TextStyle(
+                    fontSize: 15.0,
+                    color: Colors.red,
+                  ),
+                ),
                 const SizedBox(
                   height: 6.0,
                 ),
@@ -79,7 +85,10 @@ class _SingleProductItemState extends State<SingleProductItem> {
                               isLoading = false;
                             });
                           },
-                          child: const Icon(Icons.delete),
+                          child: const Icon(
+                            Icons.delete,
+                            color: Colors.red,
+                          ),
                         ),
                 ),
                 const SizedBox(
@@ -96,7 +105,10 @@ class _SingleProductItemState extends State<SingleProductItem> {
                       ),
                     );
                   },
-                  child: const Icon(Icons.edit),
+                  child: const Icon(
+                    Icons.edit,
+                    color: Colors.green,
+                  ),
                 ),
               ],
             ),
