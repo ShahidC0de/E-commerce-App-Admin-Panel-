@@ -86,20 +86,6 @@ class _SingleUserItemState extends State<SingleUserItem> {
                       color: Colors.white,
                     ),
                   ),
-            IconButton(
-              onPressed: () async {
-                Navigator.of(context).push(MaterialPageRoute(
-                  builder: (ctx) => EditProfile(
-                    userModel: widget.userModel,
-                    index: widget.index,
-                  ),
-                ));
-              },
-              icon: const Icon(
-                Icons.edit,
-                color: Colors.white,
-              ),
-            ),
           ],
         ),
       ),
