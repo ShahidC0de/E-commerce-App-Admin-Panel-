@@ -30,7 +30,8 @@ View sales earning.
 2. Navigate to the project directory 'cd techtrove_admin'.
 3. Configure all the settings e.g: place your google-services.json file from your firebase project, place api_key.
 4. Install dependencies 'flutter pub get'.
-5. Run the app 'flutter run'.
+5. Create .env file in the root folder of the project and place your api_key, e.g: API_KEY= your_api_key. And edit the firebase initialization like app id etc, given in your firebase setup.
+6. Run the app 'flutter run'.
 ## Contribution Guidelines
 
 Thank you for considering contributing to the TechTrove Admin project! Contributions are welcomed and encouraged from everyone. To maintain positive and collaborative environment, please adhere the following guidelines.
