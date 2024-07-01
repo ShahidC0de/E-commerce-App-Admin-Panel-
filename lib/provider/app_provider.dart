@@ -116,10 +116,18 @@ class AppProvider with ChangeNotifier {
   }
 
   void addCategoryModel(File image, String name) async {
-    CategoryModel categoryModel =
-        await FirebaseFirestoreHelper.instance.addSingleCategory(image, name);
-    _categoresList.add(categoryModel);
-    notifyListeners();
+    try {
+      CategoryModel categoryModel =
+          await FirebaseFirestoreHelper.instance.addSingleCategory(image, name);
+      print('calling addsingleCategory in FirebaseFirestoreHelper');
+      _categoresList.add(categoryModel);
+      print('adding it to list');
+      notifyListeners();
+      print('notifying listeners');
+    } catch (e) {
+      // Handle any errors that occur during the addCategoryModel operation
+      print('Error adding category model: $e');
+    }
   }
 
   Future<void> deleteProductFromFirebase(ProductModel productModel) async {

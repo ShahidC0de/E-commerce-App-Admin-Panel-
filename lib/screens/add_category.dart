@@ -103,24 +103,33 @@ class _AddCategoryState extends State<AddCategory> {
             height: 25.0,
           ),
           ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.green,
-              ),
-              onPressed: () async {
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.green,
+            ),
+            onPressed: () async {
+              try {
                 if (image == null && name.text.isEmpty) {
+                  print("image is null and name also");
                   Navigator.of(context).pop();
                 } else if (image != null && name.text.isNotEmpty) {
                   appProvider.addCategoryModel(image!, name.text);
+                  print("calling addCategoryModel in appProvider");
+                  showMessage('Successfully Added');
+                  Navigator.of(context).pop();
+                } else {
+                  showMessage('Please provide both image and name.');
                 }
-                showMessage('Successfully Added');
-                Navigator.of(context).pop();
-              },
-              child: const Text(
-                "Add",
-                style: TextStyle(
-                  color: Colors.white,
-                ),
-              ))
+              } catch (e) {
+                showMessage('Error adding category: $e');
+              }
+            },
+            child: const Text(
+              "Add",
+              style: TextStyle(
+                color: Colors.white,
+              ),
+            ),
+          )
         ],
       ),
     );

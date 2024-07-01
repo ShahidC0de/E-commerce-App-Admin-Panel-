@@ -76,14 +76,23 @@ class FirebaseFirestoreHelper {
   }
 
   Future<CategoryModel> addSingleCategory(File image, String name) async {
-    DocumentReference reference =
-        FirebaseFirestore.instance.collection('categories1').doc();
-    String imageUrl = await FirebaseStorageHelper.instance
-        .uploadUserImage(reference.id, image);
-    CategoryModel addCategory =
-        CategoryModel(image: imageUrl, id: reference.id, name: name);
-    await reference.set(addCategory.toJson());
-    return addCategory;
+    try {
+      DocumentReference reference =
+          FirebaseFirestore.instance.collection('categories1').doc();
+      print('reference created');
+      String imageUrl = await FirebaseStorageHelper.instance
+          .uploadUserImage(reference.id, image);
+      print('uploading image to storage');
+      CategoryModel addCategory =
+          CategoryModel(image: imageUrl, id: reference.id, name: name);
+      await reference.set(addCategory.toJson());
+      print('finally setting model in firebase');
+      return addCategory;
+    } catch (e) {
+      // Handle any errors that occur during the addSingleCategory operation
+      print('Error adding single category: $e');
+      rethrow;
+    }
   }
 
   Future<List<ProductModel>> getProducts() async {

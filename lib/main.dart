@@ -16,10 +16,12 @@ void main() async {
     Platform.isAndroid
         ? await Firebase.initializeApp(
             options: FirebaseOptions(
-                apiKey: api_key,
-                appId: "1:973121984053:android:eb57c772b96d8a919b437c",
-                messagingSenderId: "973121984053",
-                projectId: "tech-trove-shop-3ea50"),
+              apiKey: api_key,
+              appId: "1:973121984053:android:eb57c772b96d8a919b437c",
+              messagingSenderId: "973121984053",
+              projectId: "tech-trove-shop-3ea50",
+              storageBucket: "tech-trove-shop-3ea50.appspot.com",
+            ),
           )
         : await Firebase.initializeApp();
   } catch (_) {}
