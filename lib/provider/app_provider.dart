@@ -119,14 +119,10 @@ class AppProvider with ChangeNotifier {
     try {
       CategoryModel categoryModel =
           await FirebaseFirestoreHelper.instance.addSingleCategory(image, name);
-      print('calling addsingleCategory in FirebaseFirestoreHelper');
       _categoresList.add(categoryModel);
-      print('adding it to list');
       notifyListeners();
-      print('notifying listeners');
     } catch (e) {
       // Handle any errors that occur during the addCategoryModel operation
-      print('Error adding category model: $e');
     }
   }
 

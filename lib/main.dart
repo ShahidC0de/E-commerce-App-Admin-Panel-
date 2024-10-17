@@ -11,12 +11,12 @@ void main() async {
   await dotenv.load();
   WidgetsFlutterBinding.ensureInitialized();
   try {
-    final api_key = dotenv.env["API_KEY"] ?? "";
+    final apikkey = dotenv.env["API_KEY"] ?? "";
     //firebase was returning a null value, so this helped to solve the problem;
     Platform.isAndroid
         ? await Firebase.initializeApp(
             options: FirebaseOptions(
-              apiKey: api_key,
+              apiKey: apikkey,
               appId: "1:973121984053:android:eb57c772b96d8a919b437c",
               messagingSenderId: "973121984053",
               projectId: "tech-trove-shop-3ea50",

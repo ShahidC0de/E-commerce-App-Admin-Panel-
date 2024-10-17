@@ -16,20 +16,23 @@ class _ProductViewState extends State<ProductView> {
   @override
   Widget build(BuildContext context) {
     AppProvider appProvider = Provider.of<AppProvider>(context);
+    final screenWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.red,
         actions: [
           IconButton(
-              onPressed: () {
-                Navigator.of(context).push(
-                    MaterialPageRoute(builder: (ctx) => const AddProduct()));
-              },
-              icon: const Icon(
-                Icons.add_circle,
-                color: Colors.white,
-              ))
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(builder: (ctx) => const AddProduct()),
+              );
+            },
+            icon: const Icon(
+              Icons.add_circle,
+              color: Colors.white,
+            ),
+          ),
         ],
         centerTitle: true,
         title: const Text(
@@ -38,24 +41,32 @@ class _ProductViewState extends State<ProductView> {
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: EdgeInsets.all(screenWidth * 0.02), // Responsive padding
         child: GridView.builder(
-            padding: const EdgeInsets.all(8.0),
-            shrinkWrap: true,
-            primary: false,
-            itemCount: appProvider.getProductList.length,
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisSpacing: 20,
-                mainAxisSpacing: 20,
-                childAspectRatio: 0.9,
-                crossAxisCount: 2),
-            itemBuilder: (ctx, index) {
-              ProductModel singleProduct = appProvider.getProductList[index];
-              return SingleProductItem(
+          padding: EdgeInsets.all(screenWidth * 0.02), // Responsive padding
+          shrinkWrap: true,
+          primary: false,
+          itemCount: appProvider.getProductList.length,
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisSpacing: 20,
+            mainAxisSpacing: 20,
+            childAspectRatio: 0.8, // Adjusted aspect ratio for better fit
+            crossAxisCount: screenWidth > 600 ? 3 : 2, // Responsive grid
+          ),
+          itemBuilder: (ctx, index) {
+            ProductModel singleProduct = appProvider.getProductList[index];
+            return Card(
+              elevation: 5, // Adding shadow
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15), // Rounded corners
+              ),
+              child: SingleProductItem(
                 singleProduct: singleProduct,
                 index: index,
-              );
-            }),
+              ),
+            );
+          },
+        ),
       ),
     );
   }

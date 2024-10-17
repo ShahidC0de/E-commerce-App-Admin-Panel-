@@ -16,7 +16,7 @@ class FirebaseFirestoreHelper {
   Future<List<UserModel>> getUsersList() async {
     QuerySnapshot<Map<String, dynamic>> querySnapshot =
         await _firebaseFirestore.collection('users').get();
-    return querySnapshot.docs.map((e) => UserModel.fronJson(e.data())).toList();
+    return querySnapshot.docs.map((e) => UserModel.fromJson(e.data())).toList();
   }
 
   Future<List<CategoryModel>> getCategories1() async {
@@ -79,18 +79,14 @@ class FirebaseFirestoreHelper {
     try {
       DocumentReference reference =
           FirebaseFirestore.instance.collection('categories1').doc();
-      print('reference created');
       String imageUrl = await FirebaseStorageHelper.instance
           .uploadUserImage(reference.id, image);
-      print('uploading image to storage');
       CategoryModel addCategory =
           CategoryModel(image: imageUrl, id: reference.id, name: name);
       await reference.set(addCategory.toJson());
-      print('finally setting model in firebase');
       return addCategory;
     } catch (e) {
       // Handle any errors that occur during the addSingleCategory operation
-      print('Error adding single category: $e');
       rethrow;
     }
   }

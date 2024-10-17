@@ -2,18 +2,14 @@
 
 import 'dart:io';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:techtrove_admin/constants/constants.dart';
-
 import 'package:techtrove_admin/provider/app_provider.dart';
 
 class AddCategory extends StatefulWidget {
-  const AddCategory({
-    super.key,
-  });
+  const AddCategory({super.key});
 
   @override
   State<AddCategory> createState() => _AddCategoryState();
@@ -21,6 +17,8 @@ class AddCategory extends StatefulWidget {
 
 class _AddCategoryState extends State<AddCategory> {
   File? image;
+  final TextEditingController nameController = TextEditingController();
+
   void takePicture() async {
     XFile? value = await ImagePicker()
         .pickImage(source: ImageSource.gallery, imageQuality: 40);
@@ -31,7 +29,6 @@ class _AddCategoryState extends State<AddCategory> {
     }
   }
 
-  TextEditingController name = TextEditingController();
   @override
   Widget build(BuildContext context) {
     AppProvider appProvider = Provider.of<AppProvider>(context);
@@ -46,91 +43,77 @@ class _AddCategoryState extends State<AddCategory> {
           ),
         ),
       ),
-      body: ListView(
-        padding: const EdgeInsets.symmetric(horizontal: 12.0),
-        children: [
-          image == null
-              ? CupertinoButton(
-                  onPressed: takePicture,
-                  child: const CircleAvatar(
-                      backgroundColor: Colors.green,
-                      radius: 70,
-                      child: Icon(
-                        Icons.camera_alt,
-                        color: Colors.white,
-                      )),
-                )
-              : CupertinoButton(
-                  onPressed: takePicture,
-                  child: CircleAvatar(
-                    backgroundImage: FileImage(image!),
-                    radius: 70,
-                  ),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 20.0),
+        child: ListView(
+          children: [
+            Center(
+              child: GestureDetector(
+                onTap: takePicture,
+                child: CircleAvatar(
+                  radius: 70,
+                  backgroundColor: Colors.green,
+                  backgroundImage: image != null ? FileImage(image!) : null,
+                  child: image == null
+                      ? const Icon(
+                          Icons.camera_alt,
+                          color: Colors.white,
+                          size: 40,
+                        )
+                      : null,
                 ),
-          const SizedBox(
-            height: 12.0,
-          ),
-          TextFormField(
-            controller: name,
-            keyboardType: TextInputType.name,
-            decoration: InputDecoration(
-                //decoration of textformfield.
-                //EMAIL TEXTFORM FILED
+              ),
+            ),
+            const SizedBox(height: 20.0),
+            TextFormField(
+              controller: nameController,
+              keyboardType: TextInputType.name,
+              decoration: InputDecoration(
                 hintText: 'Category Name',
-                hintStyle: const TextStyle(
-                  color: Colors.green,
-                ),
+                hintStyle: const TextStyle(color: Colors.green),
                 prefixIcon: const Icon(
-                  //putting an icon.
                   Icons.category,
                   color: Colors.green,
                 ),
                 border: OutlineInputBorder(
-                  borderSide: const BorderSide(
-                    color: Colors.lightBlueAccent,
-                  ),
                   borderRadius: BorderRadius.circular(40.0),
+                  borderSide: const BorderSide(color: Colors.green),
                 ),
                 focusedBorder: OutlineInputBorder(
-                  borderSide: const BorderSide(
-                    width: 2,
-                    color: Colors.green,
-                  ),
                   borderRadius: BorderRadius.circular(40.0),
-                )),
-          ),
-          const SizedBox(
-            height: 25.0,
-          ),
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.green,
-            ),
-            onPressed: () async {
-              try {
-                if (image == null && name.text.isEmpty) {
-                  print("image is null and name also");
-                  Navigator.of(context).pop();
-                } else if (image != null && name.text.isNotEmpty) {
-                  appProvider.addCategoryModel(image!, name.text);
-                  print("calling addCategoryModel in appProvider");
-                  showMessage('Successfully Added');
-                  Navigator.of(context).pop();
-                } else {
-                  showMessage('Please provide both image and name.');
-                }
-              } catch (e) {
-                showMessage('Error adding category: $e');
-              }
-            },
-            child: const Text(
-              "Add",
-              style: TextStyle(
-                color: Colors.white,
+                  borderSide: const BorderSide(width: 2, color: Colors.green),
+                ),
               ),
             ),
-          )
-        ],
+            const SizedBox(height: 25.0),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.green,
+                padding: const EdgeInsets.symmetric(vertical: 15.0),
+              ),
+              onPressed: () async {
+                try {
+                  if (image == null || nameController.text.isEmpty) {
+                    showMessage('Please provide both image and name.');
+                  } else {
+                    appProvider.addCategoryModel(image!, nameController.text);
+                    showMessage('Successfully Added');
+                    Navigator.of(context).pop();
+                  }
+                } catch (e) {
+                  showMessage('Error adding category: $e');
+                }
+              },
+              child: const Text(
+                "Add",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 18.0,
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

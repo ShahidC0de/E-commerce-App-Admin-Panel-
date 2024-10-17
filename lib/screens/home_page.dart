@@ -8,7 +8,7 @@ import 'package:techtrove_admin/screens/single_dash_item.dart';
 import 'package:techtrove_admin/screens/users_page.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+  const HomePage({super.key});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -36,12 +36,12 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    AppProvider appProvider = Provider.of<AppProvider>(
-      context,
-    );
+    AppProvider appProvider = Provider.of<AppProvider>(context);
+    final size = MediaQuery.of(context).size;
+    final isLargeScreen = size.width > 600;
 
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.grey[100],
       appBar: AppBar(
         backgroundColor: Colors.blue,
         centerTitle: true,
@@ -49,33 +49,62 @@ class _HomePageState extends State<HomePage> {
           'Dashboard',
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
+        elevation: 0,
       ),
       body: isLoading
           ? const Center(child: CircularProgressIndicator())
           : SingleChildScrollView(
               child: Padding(
-                padding: const EdgeInsets.all(8),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    const CircleAvatar(
-                      backgroundColor: Colors.blue,
-                      radius: 30,
-                    ),
-                    const SizedBox(height: 12),
-                    const Text(
-                      'shahidzada.cs@gmail.com',
-                      style: TextStyle(
-                        color: Colors.blue,
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
+                    // User Info Section
+                    Container(
+                      padding: const EdgeInsets.all(20),
+                      decoration: BoxDecoration(
+                        color: Colors.blue[100],
+                        borderRadius: BorderRadius.circular(12),
+                        boxShadow: const [
+                          BoxShadow(
+                            color: Colors.black12,
+                            blurRadius: 8,
+                            offset: Offset(0, 4),
+                          )
+                        ],
+                      ),
+                      child: const Column(
+                        children: [
+                          CircleAvatar(
+                            backgroundColor: Colors.blue,
+                            radius: 30,
+                            child: Icon(Icons.person,
+                                color: Colors.white, size: 40),
+                          ),
+                          SizedBox(height: 12),
+                          Text(
+                            'shahidzada.cs@gmail.com',
+                            style: TextStyle(
+                              color: Colors.blue,
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
+                    const SizedBox(height: 20),
+
+                    // Dashboard Items (Responsive Grid)
                     GridView.count(
                       primary: false,
                       shrinkWrap: true,
-                      padding: const EdgeInsets.all(12),
-                      crossAxisCount: 2,
+                      padding: const EdgeInsets.all(8),
+                      crossAxisCount:
+                          isLargeScreen ? 4 : 2, // Responsive columns
+                      crossAxisSpacing: 12,
+                      mainAxisSpacing: 12,
                       children: [
                         SingleDashItem(
                           onPressed: () {
@@ -85,7 +114,7 @@ class _HomePageState extends State<HomePage> {
                           },
                           title: appProvider.getUserList.length.toString(),
                           subtitle: 'Users',
-                          backgroundColor: Colors.blue, // Blue color
+                          backgroundColor: Colors.blue,
                         ),
                         SingleDashItem(
                           onPressed: () {
@@ -96,7 +125,7 @@ class _HomePageState extends State<HomePage> {
                           title:
                               appProvider.getCatogoriesList.length.toString(),
                           subtitle: 'Categories',
-                          backgroundColor: Colors.green, // Green color
+                          backgroundColor: Colors.green,
                         ),
                         SingleDashItem(
                           onPressed: () {
@@ -106,13 +135,13 @@ class _HomePageState extends State<HomePage> {
                           },
                           title: appProvider.getProductList.length.toString(),
                           subtitle: 'Products',
-                          backgroundColor: Colors.red, // Red color
+                          backgroundColor: Colors.red,
                         ),
                         SingleDashItem(
                           onPressed: () {},
                           title: 'Rs: ${appProvider.getTotalEarning}',
                           subtitle: 'Earning',
-                          backgroundColor: Colors.purple, // Purple color
+                          backgroundColor: Colors.purple,
                         ),
                         SingleDashItem(
                           onPressed: () {
@@ -125,7 +154,7 @@ class _HomePageState extends State<HomePage> {
                           },
                           title: appProvider.getPendOrders.length.toString(),
                           subtitle: 'Pending Orders',
-                          backgroundColor: Colors.blue, // Blue color
+                          backgroundColor: Colors.blue,
                         ),
                         SingleDashItem(
                           onPressed: () {
@@ -139,7 +168,7 @@ class _HomePageState extends State<HomePage> {
                           title:
                               appProvider.getComPletedOrdErs.length.toString(),
                           subtitle: 'Delivered Orders',
-                          backgroundColor: Colors.green, // Green color
+                          backgroundColor: Colors.green,
                         ),
                         SingleDashItem(
                           onPressed: () {
@@ -152,7 +181,7 @@ class _HomePageState extends State<HomePage> {
                           },
                           title: appProvider.getCancelOrders.length.toString(),
                           subtitle: 'Canceled Orders',
-                          backgroundColor: Colors.red, // Red color
+                          backgroundColor: Colors.red,
                         ),
                       ],
                     )
