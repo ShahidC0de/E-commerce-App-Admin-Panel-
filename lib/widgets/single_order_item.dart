@@ -6,7 +6,8 @@ import 'package:provider/provider.dart';
 import 'package:techtrove_admin/models/order_model.dart';
 import 'package:techtrove_admin/models/user_model.dart'; // Import UserModel
 import 'package:techtrove_admin/provider/app_provider.dart';
-import 'package:cloud_firestore/cloud_firestore.dart'; // Import for Firestore
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:techtrove_admin/screens/home_page.dart'; // Import for Firestore
 
 class SingleOrderWidget extends StatefulWidget {
   final OrderModel orderModel;
@@ -83,6 +84,13 @@ class _SingleOrderWidgetState extends State<SingleOrderWidget> {
                             appProvider.updateUserOrder(
                                 widget.orderModel, 'delivery');
                           });
+                          Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const HomePage()),
+                            (Route<dynamic> route) =>
+                                false, // This removes all previous routes from the stack
+                          );
                         },
                         padding: const EdgeInsets.symmetric(vertical: 10),
                         child: Container(
@@ -108,6 +116,13 @@ class _SingleOrderWidgetState extends State<SingleOrderWidget> {
                         onPressed: () {
                           appProvider.updateUserOrder(
                               widget.orderModel, 'Canceled');
+                          Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const HomePage()),
+                            (Route<dynamic> route) =>
+                                false, // This removes all previous routes from the stack
+                          );
                         },
                         padding: const EdgeInsets.symmetric(vertical: 10),
                         child: Container(

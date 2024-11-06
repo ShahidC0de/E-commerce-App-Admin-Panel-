@@ -9,6 +9,7 @@ import 'package:techtrove_admin/models/category_model.dart';
 import 'package:techtrove_admin/models/order_model.dart';
 import 'package:techtrove_admin/models/product_model.dart';
 import 'package:techtrove_admin/models/user_model.dart';
+import 'package:techtrove_admin/models/users_rating_model.dart';
 
 class FirebaseFirestoreHelper {
   static FirebaseFirestoreHelper instance = FirebaseFirestoreHelper();
@@ -195,5 +196,17 @@ class FirebaseFirestoreHelper {
         .update({
       'status': update,
     });
+  }
+
+  Future<List<UsersRatingModel>> getUsersRating() async {
+    try {
+      QuerySnapshot querySnapshot =
+          await _firebaseFirestore.collection('ratings').get();
+      return querySnapshot.docs.map((doc) {
+        return UsersRatingModel.fromMap(doc.data() as Map<String, dynamic>);
+      }).toList();
+    } catch (e) {
+      throw Exception(e.toString());
+    }
   }
 }

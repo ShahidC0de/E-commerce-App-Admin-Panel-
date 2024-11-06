@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:techtrove_admin/helpers/firebase_firestore.dart';
 import 'package:techtrove_admin/provider/app_provider.dart';
 import 'package:techtrove_admin/screens/category_view.dart';
 import 'package:techtrove_admin/screens/order_list.dart';
 import 'package:techtrove_admin/screens/product_page.dart';
 import 'package:techtrove_admin/screens/single_dash_item.dart';
 import 'package:techtrove_admin/screens/users_page.dart';
+import 'package:techtrove_admin/screens/users_rating_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -182,6 +184,18 @@ class _HomePageState extends State<HomePage> {
                           title: appProvider.getCancelOrders.length.toString(),
                           subtitle: 'Canceled Orders',
                           backgroundColor: Colors.red,
+                        ),
+                        SingleDashItem(
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        const UsersRatingPage()));
+                          },
+                          title: '.....',
+                          subtitle: 'Users Rating',
+                          backgroundColor: Colors.yellow.withOpacity(0.4),
                         ),
                       ],
                     )
