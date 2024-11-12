@@ -1,29 +1,27 @@
 # techtrove_admin
-
 A central hub for managing the TechTrove (E-Commerce Application).
 
 ## Description
-
-This project is about how can the TechTrove's Admin do things like (Adding, deleting, editing the product or category). Also how the order will be accepted or rejected,
+This project is about howthe TechTrove's Admin can do things like (Adding, deleting, editing the product or category). Also how the order will be accepted or rejected,
 
 ## Features
-
 Add,delete or edit the products.
 Manage product categories.
 Accept or reject orders.
 View sales earning.
+View users ratings and feedbacks.
 
 ## Screenshots
+![Screenshot_2024-11-11-17-27-57-260_com example techtrove_admin-portrait](https://github.com/user-attachments/assets/a3202475-b7d4-4d14-b9f1-ff992917ae57)
+![Screenshot_2024-11-11-17-28-14-263_com example techtrove_admin-portrait](https://github.com/user-attachments/assets/96c7d711-3594-45cf-bff8-5c842595c294)
+![Screenshot_2024-11-11-17-28-24-562_com example techtrove_admin-portrait](https://github.com/user-attachments/assets/0719dd91-f1d5-4518-98c2-5a567b589d2e)
+![Screenshot_2024-11-11-17-28-31-634_com example techtrove_admin-portrait](https://github.com/user-attachments/assets/6ccf87c2-c13b-453c-b466-e80010329935)
+![Screenshot_2024-11-11-17-28-37-726_com example techtrove_admin-portrait](https://github.com/user-attachments/assets/4402e1c4-3156-4d07-9c5a-96a5a0519b3b)
+![Screenshot_2024-11-11-17-28-45-614_com example techtrove_admin-portrait](https://github.com/user-attachments/assets/38f6f5e4-2a77-4526-90b0-aee79ff403bf)
+![Screenshot_2024-11-11-17-28-52-561_com example techtrove_admin-portrait](https://github.com/user-attachments/assets/47b51670-ba71-4fa9-9120-f6392db760eb)
+![Screenshot_2024-11-11-17-28-58-502_com example techtrove_admin-portrait](https://github.com/user-attachments/assets/12b6bdb6-daca-44eb-be7e-1aa0ad37df0f)
+![Screenshot_2024-11-11-17-29-22-310_com example techtrove_admin-portrait](https://github.com/user-attachments/assets/bd1f9094-320d-438d-8f3d-8d840109e2a9)
 
-![Admin1](https://github.com/ShahidC0de/E-commerce-App-Admin-Panel-/assets/157512694/cbe4c013-9259-4b80-98d8-c3863f547c47)
-![Admin2](https://github.com/ShahidC0de/E-commerce-App-Admin-Panel-/assets/157512694/12f29ae0-d61a-4a4a-b9f8-de254e9d6ebf)
-![Admin3](https://github.com/ShahidC0de/E-commerce-App-Admin-Panel-/assets/157512694/8e8568e2-66b9-4058-8efb-e159e123881c)
-![Admin4](https://github.com/ShahidC0de/E-commerce-App-Admin-Panel-/assets/157512694/4fd6daec-29e6-4d8c-a4dc-b9d824b2255d)
-![Admin5](https://github.com/ShahidC0de/E-commerce-App-Admin-Panel-/assets/157512694/ef9b753f-5216-4b86-8d64-8a44f8e4111e)
-![Admin6](https://github.com/ShahidC0de/E-commerce-App-Admin-Panel-/assets/157512694/1f7fd427-000d-4f43-aad7-e5e131df2cc9)
-![Admin7](https://github.com/ShahidC0de/E-commerce-App-Admin-Panel-/assets/157512694/261c1d29-c750-4d39-93ef-629b78214ff5)
-![Admin8](https://github.com/ShahidC0de/E-commerce-App-Admin-Panel-/assets/157512694/2ffbfb00-6423-4f46-94ff-d21bae50aa0e)
-![Admin10](https://github.com/ShahidC0de/E-commerce-App-Admin-Panel-/assets/157512694/0d817f8e-988b-4459-95ab-2da12d003470)
 
 ## Setup Instructions
 1. Clone this repository.
