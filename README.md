@@ -12,15 +12,8 @@ View sales earning.
 View users ratings and feedbacks.
 
 ## Screenshots
-![Screenshot_2024-11-11-17-27-57-260_com example techtrove_admin-portrait](https://github.com/user-attachments/assets/a3202475-b7d4-4d14-b9f1-ff992917ae57)
-![Screenshot_2024-11-11-17-28-14-263_com example techtrove_admin-portrait](https://github.com/user-attachments/assets/96c7d711-3594-45cf-bff8-5c842595c294)
-![Screenshot_2024-11-11-17-28-24-562_com example techtrove_admin-portrait](https://github.com/user-attachments/assets/0719dd91-f1d5-4518-98c2-5a567b589d2e)
-![Screenshot_2024-11-11-17-28-31-634_com example techtrove_admin-portrait](https://github.com/user-attachments/assets/6ccf87c2-c13b-453c-b466-e80010329935)
-![Screenshot_2024-11-11-17-28-37-726_com example techtrove_admin-portrait](https://github.com/user-attachments/assets/4402e1c4-3156-4d07-9c5a-96a5a0519b3b)
-![Screenshot_2024-11-11-17-28-45-614_com example techtrove_admin-portrait](https://github.com/user-attachments/assets/38f6f5e4-2a77-4526-90b0-aee79ff403bf)
-![Screenshot_2024-11-11-17-28-52-561_com example techtrove_admin-portrait](https://github.com/user-attachments/assets/47b51670-ba71-4fa9-9120-f6392db760eb)
-![Screenshot_2024-11-11-17-28-58-502_com example techtrove_admin-portrait](https://github.com/user-attachments/assets/12b6bdb6-daca-44eb-be7e-1aa0ad37df0f)
-![Screenshot_2024-11-11-17-29-22-310_com example techtrove_admin-portrait](https://github.com/user-attachments/assets/bd1f9094-320d-438d-8f3d-8d840109e2a9)
+![Untitled design(1)](https://github.com/user-attachments/assets/942bf848-e981-4a44-9aec-0b9ee39fd1e3)
+
 
 
 ## Setup Instructions
